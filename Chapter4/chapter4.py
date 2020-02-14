@@ -143,11 +143,11 @@ image_name = 'Chapter4_4.png'
 plt.savefig(image_name)
 plt.close()
 
-# L1 regularization
-regularizers.l1(0.001)
-
-# L1 and L2 regularization at the same time
-regularizers.l1_l2(l1=0.001, l2=0.001)
+# # L1 regularization
+# regularizers.l1(0.001)
+#
+# # L1 and L2 regularization at the same time
+# regularizers.l1_l2(l1=0.001, l2=0.001)
 
 # # At training time: we drop out 50% of the units in the output
 # layer_output *= np.randint(0, high=2, size=layer_output.shape)
