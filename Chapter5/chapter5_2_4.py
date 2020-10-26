@@ -72,10 +72,11 @@ validation_generator = test_datagen.flow_from_directory(
 
 history = model.fit_generator(
       train_generator,
-      steps_per_epoch=100,
       epochs=100,
-      validation_data=validation_generator,
-      validation_steps=50)
+      validation_data=validation_generator)
+# steps_per_epoch=100,  # We don't need to specify this. By default, it equals to data_total_num/bastch_size
+# validation_steps=50,  # We don't need this either. By default, it equals to the number of all images in the val set.
+# So validation_steps doe NOT mean we do validation for every X steps. It actually means the number of images we test in one validation.
 
 model.save('cats_and_dogs_small_2.h5')
 

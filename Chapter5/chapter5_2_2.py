@@ -30,15 +30,10 @@ model.compile(loss='binary_crossentropy',
 train_datagen = ImageDataGenerator(rescale=1./255)
 test_datagen = ImageDataGenerator(rescale=1./255)
 
-# The path to the directory where the original
-# dataset was uncompressed
-original_dataset_dir = '/media/boom/HDD/FanBu/资料/PhD/research/dogs_vs_cats_rearr/train_rearr'
-
-# The directory where we will
-# store our smaller dataset
+# The directory where we store our smaller dataset
 base_dir = '/media/boom/HDD/FanBu/资料/PhD/research/cats_and_dogs_small'
 if not os.path.exists(base_dir):
-    os.mkdir(base_dir)
+    print("Wrong path:", base_dir)
 
 # Directories for our training,
 # validation and test splits
@@ -67,10 +62,11 @@ for data_batch, labels_batch in train_generator:
 
 history = model.fit_generator(
       train_generator,
-      steps_per_epoch=100,
       epochs=30,
-      validation_data=validation_generator,
-      validation_steps=50)
+      validation_data=validation_generator)
+# steps_per_epoch=100,  # We don't need to specify this. By default, it equals to data_total_num/bastch_size
+# validation_steps=50,  # We don't need this either. By default, it equals to the number of all images in the val set.
+# So validation_steps doe NOT mean we do validation for every X steps. It actually means the number of images we test in one validation.
 
 model.save('cats_and_dogs_small_1.h5')
 
